@@ -179,6 +179,18 @@ public class CookieTest {
     // Borked cookie
     cookie = Cookie.fromResponseHeader("=a");
     assertNull(cookie);
+
+    // Cookie end with semicolon
+    cookie = Cookie.fromResponseHeader("foo=%2Fbar; Path=/; Secure; HTTPonly;");
+    assertNull(cookie.domain);
+    assertNull(cookie.expires);
+    assertTrue(cookie.httpOnly);
+    assertNull(cookie.maxAge);
+    assertEquals(cookie.name, "foo");
+    assertEquals(cookie.path, "/");
+    assertNull(cookie.sameSite);
+    assertTrue(cookie.secure);
+    assertEquals(cookie.value, "%2Fbar");
   }
 
   @Test

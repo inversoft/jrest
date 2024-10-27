@@ -175,7 +175,9 @@ public class Cookie implements Buildable<Cookie> {
     }
 
     if (inAttributes) {
-      cookie.addAttribute(name, value);
+      if(name != null) {
+        cookie.addAttribute(name, value);
+      }
     } else {
       if (name == null || value == null || name.trim().length() == 0) {
         return null;
